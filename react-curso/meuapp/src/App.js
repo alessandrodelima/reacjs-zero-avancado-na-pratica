@@ -1,48 +1,52 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class Equipe extends Component {
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: 'Matheus',
+      contador: 0
+    };
+    this.aumentar = this.aumentar.bind(this);
+    this.diminuir = this.diminuir.bind(this);
+  }
+
+  aumentar = () => {   
+    
+    console.log("Aumentou!")
+    let state = this.state;
+    state.contador += 1;
+    state.nome = "Jose";
+    this.setState(state);
+   
+  }
+
+  diminuir = () => {
+    console.log("Diminuiu!")
+    let state = this.state;
+    this.state.contador -= 1; 
+    if(this.state.contador === 0) {
+      return;
+    }
+      state.contador = 0;
+    state.nome = "Hermenegildo";
+    this.setState(state);
+  }
+
   render() {
     return (
       <div>
-        <Sobre
-          nome={this.props.nome}
-          cargo={this.props.cargo}
-          idade={this.props.idade}
-        />
+        <h1>Contador</h1>
+        {this.state.nome}
+        <h3>
+          <button onClick={this.diminuir}> - </button>
+            {this.state.contador}
+          <button onClick={this.aumentar}> + </button>
+          </h3>  
       </div>
-    );
+    )
   }
-}
-
-class Sobre extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Olá sou o (a): {this.props.nome} </h2>
-        <h3>Cargo: {this.props.cargo}</h3>
-        <h3>Idade: {this.props.idade}</h3>
-        <hr />
-      </div>
-    );
-  }
-}
-
-function App() {
-  return (
-    <div>
-      <h1>Conheça nossa equipe:</h1>
-      <Equipe 
-        nome="João" 
-        cargo="Desenvolvedor"
-        idade="30"
-        />
-         <Equipe 
-        nome="Pedro" 
-        cargo="Desenvolvedor Backend"
-        idade="40"
-        />
-    </div>
-  )
 }
 
 export default App;
